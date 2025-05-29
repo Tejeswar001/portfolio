@@ -1,57 +1,30 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ArrowLeft, Github, ExternalLink, Calendar, Tag, Users, Award } from "lucide-react"
-import Link from "next/link"
-import { AnimatedBackground } from "@/components/animated-background"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
+import { motion } from "framer-motion";
+import {
+  ArrowLeft,
+  Github,
+  ExternalLink,
+  Calendar,
+  Tag,
+  Users,
+  Award,
+} from "lucide-react";
+import Link from "next/link";
+import { AnimatedBackground } from "@/components/animated-background";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { projects } from "@/app/data/projectdetails";
+import { notFound } from "next/navigation";
 
-// This would typically come from a CMS or API
-const projectData = {
-  title: "Customer Churn Prediction",
-  description:
-    "A comprehensive machine learning solution to predict customer churn with 94% accuracy using ensemble methods and advanced feature engineering techniques.",
-  image: "/placeholder.svg?height=400&width=800",
-  tech: ["Python", "Scikit-learn", "Pandas", "XGBoost", "Matplotlib", "Seaborn"],
-  category: "Machine Learning",
-  date: "2024-01",
-  duration: "3 months",
-  team: "Solo Project",
-  github: "https://github.com",
-  demo: "https://demo.com",
-  overview:
-    "This project addresses the critical business challenge of customer retention by developing a predictive model that identifies customers likely to churn. Using advanced machine learning techniques and comprehensive data analysis, the solution provides actionable insights for customer retention strategies.",
-  challenges: [
-    "Handling imbalanced dataset with only 20% churn rate",
-    "Feature engineering from complex customer interaction data",
-    "Optimizing model performance while maintaining interpretability",
-    "Dealing with missing values and data quality issues",
-  ],
-  solutions: [
-    "Implemented SMOTE for handling class imbalance",
-    "Created 50+ engineered features from raw customer data",
-    "Used ensemble methods combining XGBoost, Random Forest, and Logistic Regression",
-    "Applied advanced imputation techniques and data validation pipelines",
-  ],
-  results: [
-    "Achieved 94% accuracy with 89% precision and 92% recall",
-    "Identified top 10 features contributing to customer churn",
-    "Reduced false positive rate by 35% compared to baseline models",
-    "Provided actionable insights leading to 15% improvement in retention",
-  ],
-  methodology: [
-    "Data Collection & Cleaning",
-    "Exploratory Data Analysis",
-    "Feature Engineering",
-    "Model Selection & Training",
-    "Hyperparameter Tuning",
-    "Model Evaluation & Validation",
-    "Deployment & Monitoring",
-  ],
-}
+export default function ProjectDetail({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const projectData = projects.find((p) => p.slug === params.slug);
+  if (!projectData) return notFound();
 
-export default function ProjectDetail() {
   return (
     <div className="relative min-h-screen">
       <AnimatedBackground />
@@ -86,7 +59,10 @@ export default function ProjectDetail() {
               </span>
               <div className="flex items-center text-gray-600 dark:text-gray-400">
                 <Calendar className="w-4 h-4 mr-2" />
-                {new Date(projectData.date).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                {new Date(projectData.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  year: "numeric",
+                })}
               </div>
             </div>
 
@@ -94,17 +70,27 @@ export default function ProjectDetail() {
               {projectData.title}
             </h1>
 
-            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">{projectData.description}</p>
+            <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-8">
+              {projectData.description}
+            </p>
 
             <div className="flex flex-wrap gap-4">
-              <motion.a href={projectData.github} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.a
+                href={projectData.github}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white">
                   <Github className="mr-2 w-5 h-5" />
                   View Code
                 </Button>
               </motion.a>
 
-              <motion.a href={projectData.demo} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <motion.a
+                href={projectData.demo}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
                 <Button variant="outline">
                   <ExternalLink className="mr-2 w-5 h-5" />
                   Live Demo
@@ -140,24 +126,36 @@ export default function ProjectDetail() {
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-0 shadow-lg">
               <CardContent className="p-6 text-center">
                 <Calendar className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Duration</h3>
-                <p className="text-gray-600 dark:text-gray-300">{projectData.duration}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Duration
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {projectData.duration}
+                </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-0 shadow-lg">
               <CardContent className="p-6 text-center">
                 <Users className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Team</h3>
-                <p className="text-gray-600 dark:text-gray-300">{projectData.team}</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Team
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {projectData.team}
+                </p>
               </CardContent>
             </Card>
 
             <Card className="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-0 shadow-lg">
               <CardContent className="p-6 text-center">
                 <Award className="w-8 h-8 text-blue-600 mx-auto mb-3" />
-                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">Accuracy</h3>
-                <p className="text-gray-600 dark:text-gray-300">94%</p>
+                <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
+                  Accuracy
+                </h3>
+                <p className="text-gray-600 dark:text-gray-300">
+                  {projectData.accuracy}
+                </p>
               </CardContent>
             </Card>
           </motion.div>
@@ -202,7 +200,9 @@ export default function ProjectDetail() {
                 <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">
                   Project Overview
                 </h2>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{projectData.overview}</p>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {projectData.overview}
+                </p>
               </motion.div>
 
               {/* Methodology */}
@@ -211,7 +211,9 @@ export default function ProjectDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
-                <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">Methodology</h2>
+                <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">
+                  Methodology
+                </h2>
                 <div className="space-y-4">
                   {projectData.methodology.map((step, index) => (
                     <motion.div
@@ -224,7 +226,9 @@ export default function ProjectDetail() {
                       <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4">
                         {index + 1}
                       </div>
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">{step}</span>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">
+                        {step}
+                      </span>
                     </motion.div>
                   ))}
                 </div>
@@ -239,7 +243,9 @@ export default function ProjectDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.7 }}
               >
-                <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">Challenges</h2>
+                <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">
+                  Challenges
+                </h2>
                 <div className="space-y-4">
                   {projectData.challenges.map((challenge, index) => (
                     <motion.div
@@ -249,7 +255,9 @@ export default function ProjectDetail() {
                       transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
                       className="p-4 bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500 rounded-r-lg"
                     >
-                      <p className="text-gray-700 dark:text-gray-300">{challenge}</p>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {challenge}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -261,7 +269,9 @@ export default function ProjectDetail() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">Solutions</h2>
+                <h2 className="text-3xl font-orbitron font-bold mb-6 text-gray-900 dark:text-white">
+                  Solutions
+                </h2>
                 <div className="space-y-4">
                   {projectData.solutions.map((solution, index) => (
                     <motion.div
@@ -271,7 +281,9 @@ export default function ProjectDetail() {
                       transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
                       className="p-4 bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500 rounded-r-lg"
                     >
-                      <p className="text-gray-700 dark:text-gray-300">{solution}</p>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {solution}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -295,7 +307,9 @@ export default function ProjectDetail() {
                       transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                       className="p-4 bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500 rounded-r-lg"
                     >
-                      <p className="text-gray-700 dark:text-gray-300">{result}</p>
+                      <p className="text-gray-700 dark:text-gray-300">
+                        {result}
+                      </p>
                     </motion.div>
                   ))}
                 </div>
@@ -316,11 +330,14 @@ export default function ProjectDetail() {
                   Interested in This Project?
                 </h2>
                 <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-                  Want to learn more about the implementation details or discuss similar projects? I'd love to hear from
-                  you!
+                  Want to learn more about the implementation details or discuss
+                  similar projects? I'd love to hear from you!
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
                     <Button
                       asChild
                       size="lg"
@@ -329,8 +346,16 @@ export default function ProjectDetail() {
                       <Link href="/contact">Get In Touch</Link>
                     </Button>
                   </motion.div>
-                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    <Button asChild variant="outline" size="lg" className="px-8 py-3 rounded-full">
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="lg"
+                      className="px-8 py-3 rounded-full"
+                    >
                       <Link href="/projects">View More Projects</Link>
                     </Button>
                   </motion.div>
@@ -341,5 +366,5 @@ export default function ProjectDetail() {
         </div>
       </div>
     </div>
-  )
+  );
 }
