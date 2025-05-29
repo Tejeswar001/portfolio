@@ -21,7 +21,7 @@ const projects = [
     date: "2025-05",
     github: "https://github.com/Tejeswar001/RoleRadar", // update if needed
     demo: "https://roleradar-01.onrender.com/", // Add if hosted (e.g., Render, Vercel, etc.)
-    slug: "role-radar-domain-experts",
+    slug: "role-radar",
   },
 
   {
@@ -36,7 +36,7 @@ const projects = [
     github:
       "https://github.com/Tejeswar001/UrbanFlow-AI-Based-Traffic-Management",
     demo: "",
-    slug: "urbanflow-ai-traffic-management",
+    slug: "urbanflow-traffic-management",
   },
   {
     id: 2,
@@ -49,7 +49,7 @@ const projects = [
     date: "2025-04",
     github: "https://github.com/Tejeswar001/Task-Manager",
     demo: "https://task-manager-open.vercel.app/",
-    slug: "smart-todo-application",
+    slug: "smart-todo",
   },
   {
     id: 3,
@@ -107,7 +107,7 @@ const projects = [
     slug: "zomato-clone-tkinter",
   },
   {
-    id: 7,
+    id: 17,
     title: "Customer Churn Analysis",
     description:
       "Exploratory data analysis of telecom customer churn to uncover key factors influencing churn, with violin plots comparing payment methods, contract types, and tenure.",
