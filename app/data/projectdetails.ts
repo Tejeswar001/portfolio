@@ -58,7 +58,7 @@ export const projects = [
     date: "2025-04",
     duration: "4 weeks",
     team: "2 members",
-    accuray: "94.6%",
+    accuracy: "94.6%",
     github:
       "https://github.com/Tejeswar001/UrbanFlow-AI-Based-Traffic-Management",
     demo: "https://media.licdn.com/dms/image/v2/D4D22AQEZsaksJVsr8Q/feedshare-shrink_2048_1536/B4DZYvN7fRHsAs-/0/1744548909536",
