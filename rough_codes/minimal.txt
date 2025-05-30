@@ -1,0 +1,35 @@
+{/* Current Animation - Replace this entire section with photo code above */}
+              <div className="relative w-full h-full max-w-sm sm:max-w-md lg:max-w-lg">
+                {/* Minimal Central Element */}
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 1, type: "spring", bounce: 0.3 }}
+                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                >
+                  {/* Main Circle */}
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{
+                      duration: 20,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "linear",
+                    }}
+                    className="relative w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48"
+                  >
+                    <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-full backdrop-blur-sm border border-blue-200/30 dark:border-purple-400/30">
+                      <div className="absolute inset-4 bg-white/80 dark:bg-slate-900/80 rounded-full flex items-center justify-center shadow-lg">
+                        <motion.span
+                          animate={{ scale: [1, 1.1, 1] }}
+                          transition={{
+                            duration: 3,
+                            repeat: Number.POSITIVE_INFINITY,
+                          }}
+                          className="text-2xl sm:text-3xl lg:text-4xl font-orbitron font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+                        >
+                          TN
+                        </motion.span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
