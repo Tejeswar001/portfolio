@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-
+import { useForm } from "@formspree/react";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -74,15 +74,27 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      const response = await fetch("https://formspree.io/f/xeokjeog", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData), // Make sure `formData` matches Formspree field names
+      });
 
-    // Reset form
-    setFormData({ name: "", email: "", subject: "", message: "" });
-    setIsSubmitting(false);
-
-    // Show success message (you would implement this with a toast or notification)
-    alert("Message sent successfully!");
+      if (response.ok) {
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        alert("Message sent successfully!");
+      } else {
+        alert("Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Submission error:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -130,11 +142,7 @@ export default function Contact() {
                     Send Me a Message
                   </h2>
 
-                  <form
-                    onSubmit={handleSubmit}
-                    action="https://formspree.io/f/xqakkevb"
-                    className="space-y-6"
-                  >
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <label
