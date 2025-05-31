@@ -41,6 +41,21 @@ const itemVariants = {
 
 const featuredProjects = [
   {
+    title: "Credit Card Fraud Detection",
+    description:
+      "ML-based system to detect fraudulent credit card transactions using real-world data, SMOTE, PCA, and classifiers like XGBoost and Random Forest.",
+    tech: [
+      "Python",
+      "XGBoost",
+      "Random Forest",
+      "SMOTE",
+      "PCA",
+      "scikit-learn",
+    ],
+    link: "/projects/credit-card-fraud-detection",
+  },
+
+  {
     title: "Role Radar – Domain Expert Finder",
     description:
       "Flask app that identifies professionals with 10+ years of experience using GitHub, Google, and Gemini APIs with custom NLP scoring logic.",
@@ -53,13 +68,6 @@ const featuredProjects = [
       "YOLOv11 model deployed on AWS using serverless architecture to detect and classify vehicles in real time for smart traffic control.",
     tech: ["YOLOv11", "AWS Lambda", "S3", "DynamoDB", "Python"],
     link: "/projects/urbanflow",
-  },
-  {
-    title: "Smart Todo Application",
-    description:
-      "JWT-authenticated Next.js app for managing tasks with MongoDB backend, real-time updates, and full CRUD capabilities.",
-    tech: ["Next.js", "MongoDB", "JWT", "React", "Node.js"],
-    link: "/projects/smart-todo",
   },
 ];
 
