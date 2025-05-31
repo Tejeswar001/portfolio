@@ -11,6 +11,27 @@ import { Input } from "@/components/ui/input";
 
 const projects = [
   {
+    id: 8,
+    title: "Credit Card Fraud Detection",
+    description:
+      "A machine learning project to detect fraudulent credit card transactions using real-world data. Preprocessed 100K+ records, addressed class imbalance with SMOTE, reduced dimensions using PCA, and trained XGBoost and Random Forest models for high precision and recall.",
+    image: "credit_card.jpg?height=200&width=300", // make sure this image exists in your assets
+    tech: [
+      "Python",
+      "XGBoost",
+      "Random Forest",
+      "SMOTE",
+      "PCA",
+      "scikit-learn",
+      "Pandas",
+    ],
+    category: "Machine Learning",
+    date: "2025-05",
+    github: "https://github.com/Tejeswar001/credit-card-fraud-detection",
+    demo: "https://github.com/Tejeswar001/credit-card-fraud-detection/tree/main/models",
+    slug: "credit-card-fraud-detection",
+  },
+  {
     id: 7,
     title: "Role Radar: Find Domain Experts",
     description:
