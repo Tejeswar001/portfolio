@@ -1,6 +1,55 @@
 // data/projects.ts
 export const projects = [
   {
+  slug: "credit-card-fraud-detection",
+  title: "Credit Card Fraud Detection",
+  description:
+    "Detect fraudulent credit card transactions using machine learning with high precision and recall.",
+  image: "/credit_card.jpg",
+  tech: [
+    "Python",
+    "XGBoost",
+    "Random Forest",
+    "SMOTE",
+    "PCA",
+    "scikit-learn",
+    "Pandas",
+    "Matplotlib"
+  ],
+  category: "Machine Learning",
+  date: "2025-05",
+  duration: "1 weeks",
+  team: "2 members",
+  accuracy: "96.78%",
+  github: "https://github.com/Tejeswar001/credit-card-fraud-detection",
+  demo: "https://github.com/Tejeswar001/credit-card-fraud-detection/tree/main/models",
+  overview:
+    "A comprehensive ML project to detect fraudulent transactions using real-world credit card data. It tackles class imbalance using SMOTE, reduces dimensionality with PCA, and leverages powerful classifiers like XGBoost and Random Forest to ensure accurate and fast detection.",
+  challenges: [
+    "Highly imbalanced dataset (fraud vs non-fraud)",
+    "Selecting features that enhance fraud prediction",
+    "Maintaining high accuracy without overfitting"
+  ],
+  solutions: [
+    "Applied SMOTE to balance the class distribution",
+    "Used PCA to retain 95% variance while reducing feature space",
+    "Evaluated models with multiple metrics for robustness"
+  ],
+  results: [
+    "Achieved 96.78% accuracy with XGBoost",
+    "F1 Score of 0.78, Recall of 0.80 on test data",
+    "Models exported for future deployment"
+  ],
+  methodology: [
+    "Data Cleaning & Encoding",
+    "Feature Scaling",
+    "SMOTE Oversampling",
+    "PCA for Dimensionality Reduction",
+    "Model Training & Evaluation",
+    "Performance Visualization"
+  ]
+},
+  {
     slug: "role-radar",
     title: "Role Radar",
     description:
