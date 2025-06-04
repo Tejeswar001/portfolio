@@ -12,6 +12,7 @@ import {
   Github,
   Linkedin,
   Twitter,
+  Instagram,
 } from "lucide-react";
 import { AnimatedBackground } from "@/components/animated-background";
 import { Button } from "@/components/ui/button";
@@ -50,15 +51,15 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: "LinkedIn",
-    href: "www.linkedin.com/in/tejeswar-",
+    href: "https://www.linkedin.com/in/tejeswar-",
     color: "hover:text-blue-600",
   },
-  /*{
-    icon: Twitter,
-    label: "Twitter",
-    href: "https://twitter.com",
+  {
+    icon: Instagram,
+    label: "Instagram",
+    href: "https://www.instagram.com/tej_6002/",
     color: "hover:text-blue-400",
-  },*/
+  },
 ];
 
 export default function Contact() {
