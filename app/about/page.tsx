@@ -32,6 +32,7 @@ const tools = [
   "Git",
   "Docker",
   "AWS",
+  "Next.js",
 ];
 
 const education = [
@@ -52,6 +53,14 @@ const certifications = [
 ];
 
 export default function About() {
+  const handleDownloadResume = () => {
+    const link = document.createElement("a");
+    link.href = "/tej-resume.pdf";
+    link.download = "TejeswarNaiduResume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
   return (
     <div className="relative min-h-screen">
       <AnimatedBackground />
@@ -114,7 +123,10 @@ export default function About() {
                 whileTap={{ scale: 0.95 }}
                 className="mt-8"
               >
-                <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300">
+                <Button
+                  onClick={handleDownloadResume}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full font-medium shadow-lg hover:shadow-xl transition-all duration-300"
+                >
                   <Download className="mr-2 w-5 h-5" />
                   Download Resume
                 </Button>
