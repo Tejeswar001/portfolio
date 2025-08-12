@@ -9,6 +9,7 @@ import {
   Database,
   BarChart3,
   Brain,
+  Airplay,
 } from "lucide-react";
 import Link from "next/link";
 import { AnimatedBackground } from "@/components/animated-background";
@@ -427,7 +428,6 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
-
           {/* Enhanced Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -477,7 +477,7 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {[
               {
-                icon: Database,
+                icon: BarChart3,
                 title: "Data Analysis",
                 description:
                   "Statistical analysis and data mining to uncover hidden patterns and trends",
@@ -489,10 +489,10 @@ export default function Home() {
                   "Building predictive models and AI solutions for complex business problems",
               },
               {
-                icon: BarChart3,
-                title: "Data Visualization",
+                icon: Airplay,
+                title: "Web Development",
                 description:
-                  "Creating compelling visual stories that make data accessible and actionable",
+                  "Building responsive and user-friendly web applications",
               },
             ].map((skill, index) => (
               <motion.div
@@ -555,9 +555,9 @@ export default function Home() {
               >
                 <Card className="h-full bg-white dark:bg-slate-800 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:glow-effect overflow-hidden">
                   <CardContent className="p-6">
-                    <div className="h-24 sm:h-32 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-lg mb-4 sm:mb-6 flex items-center justify-center">
+                    {/*<div className="h-24 sm:h-32 bg-gradient-to-br from-blue-500/20 to-purple-600/20 rounded-lg mb-4 sm:mb-6 flex items-center justify-center">
                       <BarChart3 className="w-8 h-8 sm:w-12 sm:h-12 text-blue-600 dark:text-blue-400" />
-                    </div>
+                    </div>*/}
                     <h3 className="text-lg sm:text-xl font-semibold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       {project.title}
                     </h3>
