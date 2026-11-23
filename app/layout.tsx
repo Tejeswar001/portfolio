@@ -1,24 +1,25 @@
 import type React from "react";
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Bricolage_Grotesque, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/navbar";
+import { themes } from "@/lib/themes";
 
-const inter = Inter({
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-display",
+  axes: ["opsz", "wdth"],
 });
-
-const orbitron = Orbitron({
+const text = Newsreader({
   subsets: ["latin"],
-  variable: "--font-orbitron",
+  variable: "--font-text",
 });
 
 export const metadata: Metadata = {
-  title: "Tejeswar - Data Science Portfolio",
+  title: "Tejeswar Naidu S | Machine learning and data projects",
   description:
-    "Turning data into insights through innovative analytics and machine learning",
+    "Portfolio of Tejeswar Naidu S, a computer science student building machine-learning models and the web apps around them.",
 };
 
 export default function RootLayout({
@@ -29,18 +30,30 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.variable} ${orbitron.variable} font-sans antialiased`}
+        className={`${display.variable} ${text.variable} font-sans antialiased`}
       >
         <ThemeProvider
-          attribute="class"
+          attribute="data-theme"
+          themes={themes.map((t) => t.id)}
           defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange={false}
+          enableSystem={false}
+          disableTransitionOnChange
         >
-          <div className="relative min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-slate-900 dark:to-slate-800 transition-colors duration-500">
-            <Navbar />
-            <main className="relative z-10">{children}</main>
-          </div>
+          <Navbar />
+          <main className="mx-auto max-w-6xl px-5 sm:px-8 pb-24">
+            {children}
+          </main>
+          <footer className="mx-auto max-w-6xl px-5 sm:px-8 pb-10 text-sm text-muted-foreground">
+            <div className="border-t border-border pt-6 flex flex-wrap justify-between gap-2">
+              <span>Tejeswar Naidu S</span>
+              <a
+                href="mailto:tejeswarnaidu9@gmail.com"
+                className="hover:text-foreground underline underline-offset-4"
+              >
+                tejeswarnaidu9@gmail.com
+              </a>
+            </div>
+          </footer>
         </ThemeProvider>
       </body>
     </html>
