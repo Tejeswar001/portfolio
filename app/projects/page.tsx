@@ -1,15 +1,52 @@
 "use client";
-
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Search, Filter, Github, ExternalLink, Calendar } from "lucide-react";
 import Link from "next/link";
-import { AnimatedBackground } from "@/components/animated-background";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { projects as detailed } from "@/app/data/projectdetails";
+
+const detailSlugs = new Set(detailed.map((p) => p.slug));
+const imageSrc = (src: string) =>
+  "/" + src.replace(/^\//, "").replace(/\?.*$/, "");
 
 const projects = [
+  {
+    id: 20,
+    title: "Uptime Monitor",
+    description:
+      "A self-hosted API uptime monitor with a REST API. Flask and APScheduler ping registered endpoints every 30 seconds, and SQLAlchemy stores status codes and latency so you can query uptime percentage and average response time per endpoint.",
+    image: "",
+    tech: ["Python", "Flask", "SQLAlchemy", "APScheduler", "SQLite"],
+    category: "Backend",
+    date: "2026-07",
+    github: "https://github.com/Tejeswar001/uptime_monitor",
+    demo: "",
+    slug: "uptime-monitor",
+  },
+  {
+    id: 19,
+    title: "LPU Resume Builder",
+    description:
+      "A web app that builds resumes from manual input or imported text and JSON, shows a live A4 preview, and exports to PDF and Word. Made for LPU students.",
+    image: "/lpu_resume.png",
+    tech: ["React", "JavaScript", "Vite", "PDF export", "Word export"],
+    category: "Web Development",
+    date: "2026-03",
+    github: "https://github.com/Tejeswar001/Lpu-Resume-Generator",
+    demo: "https://lpu-resume-generator.vercel.app",
+    slug: "lpu-resume-builder",
+  },
+  {
+    id: 18,
+    title: "Heart-ML: Cardiovascular Risk Prediction",
+    description:
+      "A risk prediction platform with a Next.js front end and a Flask API serving a logistic regression model. Individuals get an instant Low, Medium or High risk result. Hospitals upload patient CSVs and filter by risk level.",
+    image: "/heart_ml.png",
+    tech: ["Python", "scikit-learn", "Flask", "Next.js", "TypeScript", "Pandas"],
+    category: "Machine Learning",
+    date: "2025-12",
+    github: "https://github.com/Tejeswar001/Heart-ML",
+    demo: "https://heart-ml-seven.vercel.app/",
+    slug: "heart-ml",
+  },
   {
     id: 8,
     title: "Credit Card Fraud Detection",
@@ -149,202 +186,153 @@ const categories = [
   "AI/NLP",
   "Data Analysis",
   "Web Development",
+  "Backend",
 ];
+
+const formatDate = (d: string) =>
+  new Date(d + "-01").toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
 
 export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const q = searchTerm.toLowerCase();
 
-  const filteredProjects = projects.filter((project) => {
-    const matchesSearch =
-      project.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      project.tech.some((tech) =>
-        tech.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    const matchesCategory =
-      selectedCategory === "All" || project.category === selectedCategory;
-    return matchesSearch && matchesCategory;
-  });
+  const filtered = projects
+    .filter((p) => {
+      const matchesSearch =
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tech.some((t) => t.toLowerCase().includes(q));
+      const matchesCategory =
+        selectedCategory === "All" || p.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    })
+    .sort((a, b) => b.date.localeCompare(a.date));
 
   return (
-    <div className="relative min-h-screen">
-      <AnimatedBackground />
+    <div className="pt-14">
+      <h1 className="text-5xl sm:text-6xl font-bold tracking-[-0.015em]">
+        Projects
+      </h1>
+      <p className="mt-4 font-serif text-xl text-muted-foreground max-w-[36rem] leading-[1.6]">
+        {projects.length} projects, newest first.
+      </p>
 
-      <div className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-4xl md:text-6xl font-orbitron font-bold mb-6 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              My Projects
-            </h1>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              A collection of data science projects showcasing machine learning,
-              analytics, and visualization skills
-            </p>
-          </motion.div>
-
-          {/* Filters */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12"
-          >
-            <div className="flex flex-col md:flex-row gap-6 items-center justify-between">
-              {/* Search */}
-              <div className="relative w-full md:w-96">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-                <Input
-                  type="text"
-                  placeholder="Search projects..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="pl-10 pr-4 py-3 w-full rounded-full border-2 focus:border-blue-500 transition-colors"
-                />
-              </div>
-
-              {/* Category Filter */}
-              <div className="flex items-center gap-2">
-                <Filter className="text-gray-400 w-5 h-5" />
-                <div className="flex flex-wrap gap-2">
-                  {categories.map((category) => (
-                    <motion.button
-                      key={category}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      onClick={() => setSelectedCategory(category)}
-                      className={`px-4 py-2 rounded-full font-medium transition-all duration-300 ${
-                        selectedCategory === category
-                          ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
-                          : "bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 shadow-md"
-                      }`}
-                    >
-                      {category}
-                    </motion.button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Projects Grid */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedCategory + searchTerm}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+      <div className="mt-10 flex flex-wrap items-end justify-between gap-x-8 gap-y-5 border-b border-foreground pb-3">
+        <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-x-6 gap-y-2">
+          {categories.map((c) => (
+            <button
+              key={c}
+              type="button"
+              onClick={() => setSelectedCategory(c)}
+              aria-pressed={selectedCategory === c}
+              className={`underline-offset-[10px] decoration-2 decoration-primary ${
+                selectedCategory === c
+                  ? "underline text-foreground font-medium"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 }}
-                  whileHover={{ y: -10 }}
-                  className="group"
-                >
-                  <Card className="h-full bg-white dark:bg-slate-800 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group-hover:glow-effect overflow-hidden">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={project.image || "/placeholder.svg"}
-                        alt={project.title}
-                        className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <motion.a
-                          href={project.github}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          className="p-2 bg-white/90 dark:bg-slate-800/90 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                        >
-                          <Github className="w-4 h-4 text-gray-700 dark:text-gray-300" />
-                        </motion.a>
-                        <motion.a
-                          href={project.demo}
-                          whileHover={{ scale: 1.1 }}
-                          whileTap={{ scale: 0.9 }}
-                          className="p-2 bg-white/90 dark:bg-slate-800/90 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                        >
-                          <ExternalLink className="w-4 h-4 text-gray-700 dark:text-gray-300" />
-                        </motion.a>
-                      </div>
-                    </div>
-
-                    <CardContent className="p-6">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="px-3 py-1 text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
-                          {project.category}
-                        </span>
-                        <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          {new Date(project.date).toLocaleDateString("en-US", {
-                            month: "short",
-                            year: "numeric",
-                          })}
-                        </div>
-                      </div>
-
-                      <h3 className="text-xl font-semibold mb-3 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                        {project.title}
-                      </h3>
-
-                      <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed line-clamp-3">
-                        {project.description}
-                      </p>
-
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {project.tech.map((tech) => (
-                          <span
-                            key={tech}
-                            className="px-2 py-1 text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-
-                      <Link href={`/projects/${project.slug}`}>
-                        <Button
-                          variant="outline"
-                          className="w-full group-hover:bg-blue-50 dark:group-hover:bg-blue-900/20 group-hover:border-blue-300 dark:group-hover:border-blue-600 transition-all duration-300"
-                        >
-                          View Details
-                        </Button>
-                      </Link>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
-
-          {filteredProjects.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <div className="text-6xl mb-4">🔍</div>
-              <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">
-                No projects found
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Try adjusting your search or filter criteria
-              </p>
-            </motion.div>
-          )}
+              {c}
+            </button>
+          ))}
+        </div>
+        <div>
+          <label htmlFor="search" className="sr-only">
+            Search projects
+          </label>
+          <input
+            id="search"
+            type="search"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder="Search by name or tool"
+            className="bg-transparent border-b border-border focus:border-primary outline-none py-1 w-56 placeholder:text-muted-foreground"
+          />
         </div>
       </div>
+
+      {filtered.length === 0 ? (
+        <p className="py-16 font-serif text-xl text-muted-foreground">
+          Nothing matches "{searchTerm}" in {selectedCategory}. Clear the search
+          or choose All.
+        </p>
+      ) : (
+        <ul>
+          {filtered.map((p) => {
+            const hasDetail = detailSlugs.has(p.slug);
+            return (
+              <li
+                key={p.id}
+                className="grid sm:grid-cols-[11rem_1fr] md:grid-cols-[13rem_1fr_auto] gap-x-8 gap-y-4 py-8 border-b border-border"
+              >
+                <div className="border border-border bg-card aspect-[4/3] overflow-hidden">
+                  {p.image ? (
+                    <img
+                      src={imageSrc(p.image)}
+                      alt={`Screenshot of ${p.title}`}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-end p-3 text-sm text-muted-foreground">
+                      No screenshot. API only.
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h2 className="text-2xl font-semibold tracking-tight">
+                    {hasDetail ? (
+                      <Link
+                        href={`/projects/${p.slug}`}
+                        className="hover:text-primary underline-offset-4 hover:underline"
+                      >
+                        {p.title}
+                      </Link>
+                    ) : (
+                      p.title
+                    )}
+                  </h2>
+                  <p className="mt-2 font-serif text-[17px] leading-[1.6] text-muted-foreground max-w-[40rem] line-clamp-3">
+                    {p.description}
+                  </p>
+                  <p className="mt-3 text-sm">{p.tech.join(", ")}</p>
+                </div>
+                <div className="text-sm md:text-right md:min-w-32 flex md:block flex-wrap gap-x-5 gap-y-1">
+                  <div className="text-muted-foreground tabular-nums">
+                    {formatDate(p.date)}
+                  </div>
+                  <div className="text-muted-foreground">{p.category}</div>
+                  <div className="md:mt-3 flex md:flex-col gap-x-5 gap-y-1">
+                    {p.github && (
+                      <a
+                        href={p.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline underline-offset-4 hover:text-primary"
+                      >
+                        Code
+                      </a>
+                    )}
+                    {p.demo && (
+                      <a
+                        href={p.demo}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline underline-offset-4 hover:text-primary"
+                      >
+                        Live demo
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
