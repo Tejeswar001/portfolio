@@ -1,6 +1,124 @@
 // data/projects.ts
 export const projects = [
   {
+    slug: "uptime-monitor",
+    title: "Uptime Monitor",
+    description:
+      "A self-hosted API uptime monitor that tracks endpoint health, latency and availability from a single Python process.",
+    image: "",
+    tech: ["Python", "Flask 3", "Flask-SQLAlchemy", "APScheduler", "Requests", "SQLite"],
+    category: "Backend",
+    date: "2026-07",
+    duration: "",
+    team: "Solo project",
+    accuracy: "",
+    github: "https://github.com/Tejeswar001/uptime_monitor",
+    demo: "",
+    overview:
+      "Uptime Monitor registers endpoints through a REST API and checks each one in the background every 30 seconds. Every check stores the status code, round-trip latency and any error, so the API can report uptime percentage and average latency over the last 50 checks. It runs from one command, creates its SQLite database on first start and needs no Docker or config files.",
+    challenges: [
+      "Running health checks on a schedule without a separate worker process",
+      "Recording enough per-check data to compute uptime and latency later",
+      "Keeping setup to a single command for a self-hosted tool",
+    ],
+    solutions: [
+      "APScheduler runs the checks inside the Flask process",
+      "A PingLog table stores status code, latency, is_up and error message for every check",
+      "SQLite is created automatically on first run, with a note on moving to PostgreSQL and Gunicorn for production",
+    ],
+    results: [
+      "REST endpoints to create, list, inspect and delete monitors",
+      "Per-monitor metrics: uptime percentage, average latency and recent logs",
+      "A check counts as up when the response is 2xx or 3xx",
+    ],
+    methodology: [
+      "Register a monitor through the REST API",
+      "Ping the endpoint on the scheduler",
+      "Store status code, latency and errors in SQLite",
+      "Query metrics and recent logs per monitor",
+    ],
+  },
+  {
+    slug: "lpu-resume-builder",
+    title: "LPU Resume Builder",
+    description:
+      "A web app for LPU students that builds resumes from guided sections or imported text, with a live A4 preview and PDF and Word export.",
+    image: "/lpu_resume.png",
+    tech: ["React", "JavaScript", "Vite", "PDF export", "Word export"],
+    category: "Web Development",
+    date: "2026-03",
+    duration: "",
+    team: "Solo project",
+    accuracy: "",
+    github: "https://github.com/Tejeswar001/Lpu-Resume-Generator",
+    demo: "https://lpu-resume-generator.vercel.app",
+    overview:
+      "LPU Resume Builder lets a student fill in a multi-section form or paste structured text or JSON, and fills the fields automatically. The resume renders as an A4 preview while they edit, and exports to PDF or Word. The editor, parsers, preview and export code are separate modules, and the repository has documentation covering data flow, import formats and known limitations.",
+    challenges: [
+      "Turning pasted text and JSON into form fields reliably",
+      "Keeping an A4 preview in step with the form as it changes",
+      "Exporting the same resume to both PDF and Word",
+    ],
+    solutions: [
+      "A dedicated parsers module handles the supported import formats",
+      "Collapsible editor sections feed a ResumePreview component that renders A4 pages",
+      "A separate export module handles PDF and Word output",
+    ],
+    results: [
+      "Resumes can be built from manual input or imported data",
+      "The preview shows the final A4 layout while editing",
+      "Documented architecture for extending the builder",
+    ],
+    methodology: [
+      "Define the resume sections and data model",
+      "Build the collapsible editor sections",
+      "Write the text and JSON import parsers",
+      "Render the A4 preview",
+      "Add PDF and Word export",
+      "Deploy to Vercel",
+    ],
+  },
+  {
+    slug: "heart-ml",
+    title: "Heart-ML: Cardiovascular Risk Prediction",
+    description:
+      "A prediction platform that turns health measurements into a Low, Medium or High cardiovascular risk result, for individuals and for hospitals.",
+    image: "/heart_ml.png",
+    tech: ["Python", "scikit-learn", "Pandas", "NumPy", "Flask", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    category: "Machine Learning",
+    date: "2025-12",
+    duration: "",
+    team: "Solo project",
+    accuracy: "",
+    github: "https://github.com/Tejeswar001/Heart-ML",
+    demo: "https://heart-ml-seven.vercel.app/",
+    overview:
+      "Heart-ML pairs a documented data science pipeline with a web interface. Five Jupyter notebooks cover cleaning, data quality, exploratory analysis, preprocessing and model training. A binary logistic regression model, chosen for interpretability, is served by a Flask API. The Next.js front end has a prediction form for individuals and a hospital dashboard that accepts bulk CSV uploads and filters patients by risk level.",
+    challenges: [
+      "Making a medical risk model understandable to non-specialists",
+      "Preparing raw patient data with missing values and outliers",
+      "Serving both single predictions and bulk uploads from one model",
+    ],
+    solutions: [
+      "Logistic regression as an interpretable baseline model",
+      "Cleaning, encoding and z-score scaling, plus derived features such as BMI, waist-to-height ratio, blood pressure category and estimated LDL",
+      "A Flask /predict endpoint behind a prediction form and a hospital CSV upload and dashboard",
+    ],
+    results: [
+      "Instant risk probability with a Low, Medium or High category",
+      "A hospital dashboard with risk filtering and distribution charts",
+      "A reproducible five-notebook pipeline from raw data to trained model",
+    ],
+    methodology: [
+      "Study and clean the dataset",
+      "Run data quality checks",
+      "Exploratory data analysis",
+      "Feature engineering and scaling",
+      "Train and evaluate the logistic regression model",
+      "Serve the model through Flask and build the Next.js interface",
+    ],
+  },
+  {
   slug: "credit-card-fraud-detection",
   title: "Credit Card Fraud Detection",
   description:
@@ -68,7 +186,7 @@ export const projects = [
     challenges: [
       "Scraping reliable data in real time without being rate-limited",
       "Designing a confidence score that balances multiple relevance factors",
-      "Integrating multiple APIs seamlessly within response time goals",
+      "Combining the Serper.dev, GitHub and Gemini APIs inside a 20-second response budget",
     ],
     solutions: [
       "Used Serper.dev for Google-like search results and GitHub API for detailed metadata",
@@ -78,7 +196,7 @@ export const projects = [
     results: [
       "Returned top experts in under 20 seconds per search",
       "Confidence score accuracy validated with test prompts",
-      "Effortless UX with no dummy data; 100% real profiles",
+      "Every result is a real profile; no dummy data",
     ],
     methodology: [
       "Keyword Parsing",
