@@ -214,7 +214,7 @@ export default function Projects() {
 
   return (
     <div className="pt-14">
-      <h1 className="text-5xl sm:text-6xl font-bold tracking-[-0.015em]">
+      <h1 className="text-[clamp(2.5rem,10vw,3.75rem)] font-bold tracking-[-0.015em]">
         Projects
       </h1>
       <p className="mt-4 font-serif text-xl text-muted-foreground max-w-[36rem] leading-[1.6]">
@@ -229,7 +229,7 @@ export default function Projects() {
               type="button"
               onClick={() => setSelectedCategory(c)}
               aria-pressed={selectedCategory === c}
-              className={`underline-offset-[10px] decoration-2 decoration-primary ${
+              className={`py-1 underline-offset-[10px] decoration-2 decoration-primary ${
                 selectedCategory === c
                   ? "underline text-foreground font-medium"
                   : "text-muted-foreground hover:text-foreground"
@@ -268,7 +268,7 @@ export default function Projects() {
                 key={p.id}
                 className="grid sm:grid-cols-[11rem_1fr] md:grid-cols-[13rem_1fr_auto] gap-x-8 gap-y-4 py-8 border-b border-border"
               >
-                <div className="border border-border bg-card aspect-[4/3] overflow-hidden">
+                <div className="border border-border bg-card aspect-[16/9] sm:aspect-[4/3] overflow-hidden">
                   {p.image ? (
                     <img
                       src={imageSrc(p.image)}
@@ -295,7 +295,7 @@ export default function Projects() {
                       p.title
                     )}
                   </h2>
-                  <p className="mt-2 font-serif text-[17px] leading-[1.6] text-muted-foreground max-w-[40rem] line-clamp-3">
+                  <p className="mt-2 font-serif text-[1.0625rem] leading-[1.6] text-muted-foreground max-w-[40rem] line-clamp-3">
                     {p.description}
                   </p>
                   <p className="mt-3 text-sm">{p.tech.join(", ")}</p>

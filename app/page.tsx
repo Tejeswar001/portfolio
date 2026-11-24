@@ -33,7 +33,7 @@ export default function Home() {
     <>
       <section className="grid lg:grid-cols-[1.05fr_1fr] gap-12 lg:gap-16 pt-12 sm:pt-20 pb-20 items-center">
         <div>
-          <h1 className="text-[2.75rem] leading-[1.02] sm:text-7xl font-bold tracking-[-0.015em]">
+          <h1 className="text-[clamp(2.25rem,9vw,4.5rem)] lg:text-[clamp(2.75rem,4.6vw,4.5rem)] leading-[1.02] font-bold tracking-[-0.015em]">
             I build machine-learning models and the apps that put them to use.
           </h1>
           <p className="mt-7 max-w-[34rem] font-serif text-xl leading-[1.6] text-muted-foreground">
@@ -67,7 +67,7 @@ export default function Home() {
 
         <div>
           <ThresholdPlot />
-          <p className="mt-6 font-serif text-[17px] leading-[1.6] text-muted-foreground max-w-[34rem]">
+          <p className="mt-6 font-serif text-[1.0625rem] leading-[1.6] text-muted-foreground max-w-[34rem]">
             Move the threshold to see the trade-off at the center of my fraud
             detection project: catch more fraud and you flag more honest
             customers too. This plot uses made-up data.

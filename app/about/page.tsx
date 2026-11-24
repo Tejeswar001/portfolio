@@ -24,7 +24,7 @@ const certifications = [
 export default function About() {
   return (
     <div className="pt-14">
-      <h1 className="text-5xl sm:text-6xl font-bold tracking-[-0.015em]">
+      <h1 className="text-[clamp(2.5rem,10vw,3.75rem)] font-bold tracking-[-0.015em]">
         About
       </h1>
 

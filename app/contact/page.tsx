@@ -43,7 +43,7 @@ export default function Contact() {
 
   return (
     <div className="pt-14">
-      <h1 className="text-5xl sm:text-6xl font-bold tracking-[-0.015em]">
+      <h1 className="text-[clamp(2.5rem,10vw,3.75rem)] font-bold tracking-[-0.015em]">
         Contact
       </h1>
       <p className="mt-4 font-serif text-xl text-muted-foreground max-w-[36rem] leading-[1.6]">

@@ -38,7 +38,7 @@ export default function ProjectDetail({
         All projects
       </Link>
 
-      <h1 className="mt-8 text-5xl sm:text-7xl font-bold tracking-[-0.015em] leading-[1.02] max-w-4xl">
+      <h1 className="mt-8 text-[clamp(2rem,8.5vw,4.5rem)] font-bold tracking-[-0.015em] leading-[1.02] max-w-4xl">
         {project.title}
       </h1>
       <p className="mt-6 font-serif text-xl sm:text-2xl leading-[1.55] text-muted-foreground max-w-[40rem]">

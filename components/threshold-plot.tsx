@@ -57,7 +57,7 @@ export function ThresholdPlot() {
           preserveAspectRatio="none"
           role="img"
           aria-label={`Scatter plot of ${points.length} transactions. With the threshold at ${threshold} percent, ${flagged.length} are flagged, ${tp} of ${totalFraud} fraudulent ones are caught, and ${falseAlarms} are false alarms.`}
-          className="block w-full h-[260px] sm:h-[320px]"
+          className="block w-full h-[16.25rem] sm:h-[20rem]"
         >
           <rect
             x={threshold}

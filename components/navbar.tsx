@@ -26,7 +26,7 @@ export function Navbar() {
         <Link href="/" className="font-semibold tracking-tight text-lg">
           Tejeswar Naidu S
         </Link>
-        <div className="flex items-center gap-5 sm:gap-8 text-[15px]">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 sm:gap-x-8 text-[0.9375rem]">
           {navItems.map((item) => {
             const active = pathname.startsWith(item.href);
             return (

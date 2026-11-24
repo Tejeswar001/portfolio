@@ -328,3 +328,20 @@
   html { scroll-behavior: auto; }
   .point-in { animation: none; }
 }
+
+/* Responsive: headings never overflow, big screens scale up, touch targets stay usable. */
+h1, h2, h3 { overflow-wrap: break-word; hyphens: auto; }
+img { max-width: 100%; }
+@media (min-width: 1800px) { html { font-size: 112.5%; } }
+@media (min-width: 2400px) { html { font-size: 137.5%; } }
+@media (min-width: 3200px) { html { font-size: 175%; } }
+@media (pointer: coarse) {
+  header nav a, header nav select, main button, main input, main textarea, main select {
+    min-height: 44px;
+  }
+  header nav a { display: inline-flex; align-items: center; }
+  input[type="range"] { min-height: 32px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  main { padding-bottom: 3rem; }
+}
